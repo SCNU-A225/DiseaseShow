@@ -2,14 +2,15 @@ package com.a225.diseaseshow.hadoop;
 
 import com.a225.diseaseshow.bean.ResultRes;
 import com.a225.diseaseshow.utils.HDFSUtil;
-import org.apache.hadoop.fs.FileSystem;
-import org.apache.hadoop.fs.LocatedFileStatus;
-import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.fs.RemoteIterator;
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.*;
+import org.apache.hadoop.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
@@ -61,5 +62,27 @@ public class HDFSClient {
         }
         fs.close();
         return new ResultRes(200,"查询成功",list);
+    }
+
+    // 文件上传
+    public ResultRes upload(FileInputStream fis, String path) throws InterruptedException, IOException, URISyntaxException {
+        FileSystem fs = hdfsUtil.getHDFS();
+        FSDataOutputStream fos = fs.create(new Path(path));
+        IOUtils.copyBytes(fis,fos,new Configuration());
+        IOUtils.closeStream(fos);
+        IOUtils.closeStream(fis);
+        fs.close();
+        return new ResultRes(200,"上传成功");
+    }
+
+    // 文件下载
+    // os为response的输出流
+    public ResultRes download(OutputStream os,String path) throws InterruptedException, IOException, URISyntaxException {
+        FileSystem fs = hdfsUtil.getHDFS();
+        FSDataInputStream fis = fs.open(new Path(path));
+        IOUtils.copyBytes(fis,os,new Configuration());
+        IOUtils.closeStream(fis);
+        fis.close();
+        return new ResultRes(200,"下载成功");
     }
 }
