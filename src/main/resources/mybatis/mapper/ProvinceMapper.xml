@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.a225.diseaseshow.dao.ProvinceDao">
+    <select id="insert" parameterType="com.a225.diseaseshow.bean.ProvinceBean">
+        INSERT INTO provinces(province,sum,cured,dead) VALUES(#{bean.province},#{bean.sum},#{bean.cured},#{bean.dead})
+    </select>
+
+    <update id="truncate">
+        truncate table provinces
+    </update>
+</mapper>
