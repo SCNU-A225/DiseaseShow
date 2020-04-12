@@ -4,7 +4,6 @@ import com.a225.diseaseshow.bean.ProvinceBean;
 import com.a225.diseaseshow.hadoop.format.ProvinceOutputFormat;
 import com.a225.diseaseshow.hadoop.map.ProvinceMapper;
 import com.a225.diseaseshow.hadoop.reduce.ProvinceReducer;
-import com.a225.diseaseshow.utils.PropertiesUtils;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.Text;
@@ -16,10 +15,12 @@ import java.io.IOException;
 
 public class ProvinceDriver {
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
-
+//        args = new String[]{"E:/hadoopTestFile/province.csv","E:/hadoopTestFile/output"};
+        args = new String[]{"hdfs:/disease/province.csv","hdfs:/disease/output"};
         Configuration conf = new Configuration();
-        String hdfsUri = (String) PropertiesUtils.getProperty("hdfs.uri");
-        conf.set("fs.defaultFS", hdfsUri);
+//        conf.set("mapreduce.framework.name", "yarn");
+//        conf.set("yarn.resourcemanmager.address", "192.168.10.100");
+
         Job job = Job.getInstance(conf);
 
         job.setJarByClass(ProvinceDriver.class);
