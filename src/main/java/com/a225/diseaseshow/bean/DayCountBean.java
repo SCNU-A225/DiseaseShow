@@ -1,26 +1,17 @@
 package com.a225.diseaseshow.bean;
 
-public class ProvinceBean {
-    private int id;
-    private String province;
+public class DayCountBean {
+    private int day;
     private int sum;
     private int cured;
     private int dead;
 
-    public int getId() {
-        return id;
+    public int getDay() {
+        return day;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
+    public void setDay(int day) {
+        this.day = day;
     }
 
     public int getSum() {

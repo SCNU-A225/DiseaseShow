@@ -1,6 +1,11 @@
 spring:
+  http:
+    encoding:
+      force: true
+      charset: utf-8
+      enabled: true
   datasource:
-    url: jdbc:mysql://192.168.10.100:3306/disease?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://47.100.10.67:3306/disease?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -75,9 +80,6 @@ mybatis:
 
 log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-# HDFS 集群配置
-hdfs:
-  # nameNode uri
-  uri: hdfs://192.168.10.100:9000
-  # nameNode主机用户名
-  user: hadoop
+server:
+  tomcat:
+    uri-encoding: utf-8
