@@ -24,8 +24,9 @@
 <!-- 指定YARN的ResourceManager的地址 -->
 <property>
 <name>yarn.resourcemanager.hostname</name>
-<value>192.168.10.100</value>
+<value>192.168.0.111</value>
 </property>
+
 <!-- 日志聚集功能使能 -->
 <property>
 <name>yarn.log-aggregation-enable</name>
@@ -36,6 +37,23 @@
 <property>
 <name>yarn.log-aggregation.retain-seconds</name>
 <value>604800</value>
+</property>
+
+<property>
+  <name>yarn.application.classpath</name>
+	<value>
+	   /opt/module/hadoop-2.7.2/etc/*,
+	   /opt/module/hadoop-2.7.2/etc/hadoop/*,
+	   /opt/module/hadoop-2.7.2/lib/*,
+	   /opt/module/hadoop-2.7.2/share/hadoop/common/*,
+	   /opt/module/hadoop-2.7.2/share/hadoop/common/lib/*,
+	   /opt/module/hadoop-2.7.2/share/hadoop/mapreduce/*,
+	   /opt/module/hadoop-2.7.2/share/hadoop/mapreduce/lib/*,
+	   /opt/module/hadoop-2.7.2/share/hadoop/hdfs/*,
+	   /opt/module/hadoop-2.7.2/share/hadoop/hdfs/lib/*,
+	   /opt/module/hadoop-2.7.2/share/hadoop/yarn/*,
+	   /opt/module/hadoop-2.7.2/share/hadoop/yarn/lib/*
+	</value>
 </property>
 
 </configuration>

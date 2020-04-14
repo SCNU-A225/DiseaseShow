@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://192.168.10.100:3306/disease?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://192.168.0.112:3306/disease?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
     username: root
-    password: root
+    password: "123456"
     driver-class-name: com.mysql.cj.jdbc.Driver
 
     # 使用 druid 作为连接池  更多配置的说明可以参见 druid starter 中文文档 https://github.com/alibaba/druid/tree/master/druid-spring-boot-starter
@@ -78,6 +78,6 @@ log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 # HDFS 集群配置
 hdfs:
   # nameNode uri
-  uri: hdfs://192.168.10.100:9000
+  uri: hdfs://192.168.0.110:9000
   # nameNode主机用户名
-  user: hadoop
+  user: root

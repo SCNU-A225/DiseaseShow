@@ -2,6 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -16,6 +18,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <JAVA_HOME>D:\jdk\jdk8</JAVA_HOME>
     </properties>
 
     <dependencies>
@@ -103,7 +106,7 @@
             <version>1.8</version>
             <scope>system</scope>
             <!--使用本地jdk的tools.jar包:${JAVA_HOME}/lib/tools.jar-->
-            <systemPath>C:/Program Files/Java/jdk1.8.0_201/lib/tools.jar</systemPath>
+            <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
         </dependency>
     </dependencies>
 

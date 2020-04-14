@@ -17,6 +17,7 @@
 <!-- Put site-specific property overrides in this file. -->
 
 <configuration>
+<!-- 指定MR运行在YARN上 -->
 <property>
 		<name>mapreduce.framework.name</name>
 		<value>yarn</value>
@@ -24,12 +25,11 @@
 <!-- 历史服务器端地址 -->
 <property>
 <name>mapreduce.jobhistory.address</name>
-<value>192.168.10.100:10020</value>
+<value>192.168.0.110:10020</value>
 </property>
 <!-- 历史服务器web端地址 -->
 <property>
     <name>mapreduce.jobhistory.webapp.address</name>
-    <value>192.168.10.100:19888</value>
+    <value>192.168.0.110:19888</value>
 </property>
-
 </configuration>

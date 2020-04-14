@@ -7,19 +7,23 @@ import org.springframework.core.io.Resource;
 import java.util.Properties;
 
 public class PropertiesUtils {
-    private static String PROPERTY_NAME = "application.yml";
+    private static final String PROPERTY_NAME = "application.yml";
+    private static final YamlPropertiesFactoryBean yamlFactory;
+
+    static {
+        Resource resource = new ClassPathResource(PROPERTY_NAME);
+        yamlFactory = new YamlPropertiesFactoryBean();
+        yamlFactory.setResources(resource);
+    }
 
     public static Object getProperty(Object key){
-        Resource resource = new ClassPathResource(PROPERTY_NAME);
-        Properties properties = null;
         try {
-            YamlPropertiesFactoryBean yamlFactory = new YamlPropertiesFactoryBean();
-            yamlFactory.setResources(resource);
-            properties =  yamlFactory.getObject();
+            Properties properties = yamlFactory.getObject();
+            assert properties != null;
+            return properties.get(key);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-        return properties.get(key);
     }
 }

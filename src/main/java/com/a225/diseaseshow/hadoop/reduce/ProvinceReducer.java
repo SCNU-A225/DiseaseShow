@@ -1,12 +1,13 @@
 package com.a225.diseaseshow.hadoop.reduce;
 
 import com.a225.diseaseshow.bean.ProvinceBean;
+import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
 
 import java.io.IOException;
 
-public class ProvinceReducer extends Reducer<Text,ProvinceBean,Text,ProvinceBean> {
+public class ProvinceReducer extends Reducer<Text,ProvinceBean,Text, IntWritable> {
     @Override
     protected void reduce(Text key, Iterable<ProvinceBean> values, Context context) throws IOException, InterruptedException {
         int sum = 0;
@@ -21,6 +22,6 @@ public class ProvinceReducer extends Reducer<Text,ProvinceBean,Text,ProvinceBean
         // 2 封装对象
         ProvinceBean bean = new ProvinceBean(key.toString(),sum,cured,dead);
         // 3 写出
-        context.write(key,bean);
+        context.write(key,new IntWritable(sum));
     }
 }

@@ -16,10 +16,20 @@ import java.io.IOException;
 public class ProvinceDriver {
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 //        args = new String[]{"E:/hadoopTestFile/province.csv","E:/hadoopTestFile/output"};
-        args = new String[]{"hdfs:/disease/province.csv","hdfs:/disease/output"};
+
+
+        args = new String[]{"/disease/province.csv","/disease/output"};
+        //args = new String[]{"D:/test/hadoop_test/province.csv","D:/test/hadoop_test/output"};
         Configuration conf = new Configuration();
-//        conf.set("mapreduce.framework.name", "yarn");
-//        conf.set("yarn.resourcemanmager.address", "192.168.10.100");
+        conf.set("fs.defaultFS","hdfs://192.168.0.110:9000");
+        //conf.set("hadoop.tmp.dir","/opt/module/hadoop-2.7.2/data/tmp");
+        System.setProperty("HADOOP_USER_NAME", "root");
+        //System.setProperty("user.name", "root");
+        conf.set("mapreduce.framework.name", "yarn");
+        conf.set("yarn.resourcemanager.hostname", "192.168.0.111");
+        conf.set("mapreduce.app-submission.cross-platform", "true");
+        conf.set("mapreduce.job.jar","src\\main\\resources\\com.jar");
+
 
         Job job = Job.getInstance(conf);
 
@@ -33,7 +43,7 @@ public class ProvinceDriver {
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(ProvinceBean.class);
 
-        job.setOutputFormatClass(ProvinceOutputFormat.class);
+        //job.setOutputFormatClass(ProvinceOutputFormat.class);
 
         FileInputFormat.setInputPaths(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job,new Path(args[1]));
