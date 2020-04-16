@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
+import weka.classifiers.functions.SimpleLogistic;
 import weka.classifiers.trees.J48;
 import weka.core.Attribute;
 import weka.core.DenseInstance;
@@ -45,7 +46,7 @@ public class DiabetesService {
         dataSet.setClass(dataSet.attribute(dataSet.numAttributes() - 1));
 
         //新建分类器
-        classifier = new J48();
+        classifier = new SimpleLogistic();
         classifier.buildClassifier(dataSet);
 
         //建立空instances方便创建空instance
