@@ -24,12 +24,6 @@ public class DiabetesController {
     @Autowired
     private DiabetesService diabetesService;
 
-    @RequestMapping(value = {"/","","index"})
-    public String index(Model model){
-        model.addAttribute("msg","test msg");
-        return "diabetes";
-    }
-
     @RequestMapping("/predict")
     @ResponseBody
     //妊娠、血糖、血压、皮肤厚度、胰岛素、体重指数、糖尿病患者的功能、年龄
