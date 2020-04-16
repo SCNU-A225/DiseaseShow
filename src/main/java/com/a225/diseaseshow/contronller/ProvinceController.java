@@ -1,6 +1,7 @@
 package com.a225.diseaseshow.contronller;
 
 import com.a225.diseaseshow.bean.ProvinceBean;
+import com.a225.diseaseshow.bean.ResultRes;
 import com.a225.diseaseshow.service.ProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,8 @@ public class ProvinceController {
 
     @RequestMapping(value = "/selectAll", method = RequestMethod.GET)
     @ResponseBody
-    public List<ProvinceBean> selectAll(){
-        return provinceService.selectAll();
+    public ResultRes selectAll(){
+        List<ProvinceBean> list = provinceService.selectAll();
+        return new ResultRes(200,"查询成功",list);
     }
 }
