@@ -14,6 +14,7 @@ import weka.core.Instances;
 import weka.core.converters.ArffLoader;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 
@@ -37,20 +38,24 @@ public class DiabetesService {
     private void initModel() throws Exception {
         logger.info("初始化糖尿病预测model");
 
+        //读入数据集
         ArffLoader arffLoader = new ArffLoader();
-        arffLoader.setFile(new File("src\\main\\resources\\data\\diabetes.arff"));
+        arffLoader.setSource(DiabetesService.class.getResourceAsStream("/data/diabetes.arff"));
         Instances dataSet = arffLoader.getDataSet();
         dataSet.setClass(dataSet.attribute(dataSet.numAttributes() - 1));
 
+        //新建分类器
         classifier = new J48();
         classifier.buildClassifier(dataSet);
 
+        //建立空instances方便创建空instance
         for (int i = 0; i < dataSet.numAttributes(); i++) {
             attributesList.add(dataSet.attribute(i));
         }
         blankInstances = new Instances("data", attributesList, 0);
         blankInstances.setClassIndex(dataSet.numAttributes() - 1);
 
+        //验证
         Evaluation evaluation = new Evaluation(dataSet);
         int length = dataSet.numInstances();
         for (int i = 0; i < length; i++) {
@@ -64,10 +69,11 @@ public class DiabetesService {
 
     public DiabetesService() throws Exception {
         initModel();
-
     }
 
+    //预测
     public boolean predict(int Pregnancies, int Glucose, int BloodPressure, int SkinThickness, int Insulin, double BMI, double DiabetesPedigreeFunction, int Age) throws Exception {
+        //创建空instance
         Instance instance = new DenseInstance(9);
         instance.setValue(0, Pregnancies);
         instance.setValue(1, Glucose);
